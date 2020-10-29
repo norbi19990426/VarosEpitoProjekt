@@ -86,7 +86,6 @@ namespace VarosEpitoProjekt
             }
         }
 
-
         public override string ToString()
         {
             return string.Format("{0} - Lakosok: {1}/{2} - Üzletek: {3} - Alapterület: {4} m² "
