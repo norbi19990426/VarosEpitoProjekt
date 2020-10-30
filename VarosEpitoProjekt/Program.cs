@@ -10,7 +10,8 @@ namespace VarosEpitoProjekt
     {
         static void Main(string[] args)
         {
-
+            Varos v = new Varos("hey", 10);
+      
         }
     }
 }

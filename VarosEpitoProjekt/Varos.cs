@@ -43,7 +43,24 @@ namespace VarosEpitoProjekt
             }
             set
             {
-                lakosok = value;
+                if (Lakosok > value)
+                {
+                    Console.WriteLine("Lakosok száma nem csökkenhet!");
+                }
+                else
+                {
+                    if (Lakosok > MaxLakosok)
+                    {
+                        Console.WriteLine("Lakosok száma nem lehet több, mint a megengedett.");
+                    }
+                    else
+                    {
+                        lakosok = value;
+
+                    }
+                }    
+                
+                
             }
         }
         public int Hazak
@@ -54,7 +71,22 @@ namespace VarosEpitoProjekt
             }
             set
             {
-                hazak = value;
+                if (Hazak > value)
+                {
+                    if (MaxLakosok < Lakosok)
+                    {
+                        Console.WriteLine("Túl kevés ház!");
+                    }
+                    else
+                    {
+                        hazak = value;
+                    }
+                }
+                else
+                {
+                    hazak = value;
+                }
+                
             }
         }
         public int Uzletek
@@ -85,6 +117,43 @@ namespace VarosEpitoProjekt
                 return hazak * 110 + uzletek * 85.5;
             }
         }
+        public void uzletEpit(int db)
+        {
+            if (db == 0 || db < 0)
+            {
+                Console.WriteLine("A szám nem lehet 0 vagy minusz szám!");
+            }
+            else
+            {
+                double maxUzletek = lakosok / 20;
+                uzletek += db;
+                if (uzletek > maxUzletek)
+                {
+                    Math.Floor(maxUzletek);
+                    uzletek = Convert.ToInt32(maxUzletek);
+                    Console.WriteLine("Túl lépte a maximális üzletszámot.");
+                }
+            }
+        }
+        public int compareTo(Varos masik)
+        {
+            int szam;
+            if (Alapterulet == masik.Alapterulet)
+            {
+                szam = 0;
+            }
+            else if (Alapterulet < masik.Alapterulet)
+            {
+                szam = -1;
+            }
+            else
+            {
+                szam = 1;
+            }
+
+            return szam;
+        }
+
 
         public override string ToString()
         {
