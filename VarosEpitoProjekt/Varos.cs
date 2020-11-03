@@ -25,9 +25,9 @@ namespace VarosEpitoProjekt
                 case 3: this.hazak = 450; this.uzletek = 50;
                     break;
             }
-            this.lakosok = MaxLakosok / 2;
+            this.lakosok = MaxLakosok/2;
         }
-        
+        public Varos() { }
         public string Nev
         {
             get
@@ -43,13 +43,14 @@ namespace VarosEpitoProjekt
             }
             set
             {
-                if (Lakosok > value)
+                if (lakosok > value)
                 {
                     Console.WriteLine("Lakosok száma nem csökkenhet!");
                 }
                 else
                 {
-                    if (Lakosok > MaxLakosok)
+                    
+                    if (lakosok > MaxLakosok)
                     {
                         Console.WriteLine("Lakosok száma nem lehet több, mint a megengedett.");
                     }
@@ -100,14 +101,9 @@ namespace VarosEpitoProjekt
         {
             get
             {
-                if (lakosok != 0)
-                {
-                    return lakosok;
-                }
-                else
-                {
-                    return hazak * 6;
-                }
+                
+                return hazak * 6;
+               
             }
         }
         public double Alapterulet
@@ -131,7 +127,7 @@ namespace VarosEpitoProjekt
                 {
                     Math.Floor(maxUzletek);
                     uzletek = Convert.ToInt32(maxUzletek);
-                    Console.WriteLine("Túl lépte a maximális üzletszámot.");
+                    Console.WriteLine("{0}: Túl lépte a maximális üzletszámot.",this.nev);
                 }
             }
         }
@@ -153,8 +149,55 @@ namespace VarosEpitoProjekt
 
             return szam;
         }
+        public char menu()
+        {
+            char dontes;
 
+            do
+            {
+                Console.WriteLine("a.) Lakosok betelepítése \n" +
+                                  "b.) Ház építés \n" +
+                                  "c.) Üzlet építés \n" +
+                                  "d.) Kilépés");
+                Console.WriteLine("Válassz egy menüpontot: ");
+                dontes = Convert.ToChar(Console.ReadLine());
+            } while (dontes != 'a' && dontes != 'b' && dontes != 'c' && dontes != 'd');
 
+            return dontes;
+        }
+        public void aMenu()
+        {
+            Console.WriteLine("Mennyi lakost szeretne betelepíteni?: ");
+            int ember = Convert.ToInt32(Console.ReadLine());
+
+            this.lakosok += ember;
+        }
+        public void bMenu()
+        {
+            Random rnd = new Random();
+            int veletlenSzam = rnd.Next(10, 21);
+            this.hazak += veletlenSzam;
+        }
+        public void cMenu()
+        {
+            uzletEpit(10);
+        }
+        public int dMenu(char dontes)
+        { 
+            return dontes == 'd' ? 0 : 1; 
+        }
+        public void nyertes(string nev, double alapterulet)
+        {
+            if (Alapterulet > alapterulet)
+            {
+                Console.WriteLine("{0} nyert {1} alapterülettel",this.nev,Alapterulet);
+            }
+            else
+            {
+                Console.WriteLine("{0} nyert {1} alapterülettel",nev , alapterulet);
+
+            }
+        }
         public override string ToString()
         {
             return string.Format("{0} - Lakosok: {1}/{2} - Üzletek: {3} - Alapterület: {4} m² "
